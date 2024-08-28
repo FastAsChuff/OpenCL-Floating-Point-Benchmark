@@ -13,7 +13,7 @@ Detected 2 Devices In Platform.
   Device No. 1 - NVIDIA GeForce GT 730
 Executing Kernel. Please Wait...
 FG Count = 29283274 / 4529848320
-Estimated fp performance = 144.285660 Gflops
+Estimated float performance = 144.285660 Gflops
 Kernel Duration = 43953 msecs
 
 Detected 1 OpenCL Platforms.
@@ -23,7 +23,7 @@ Detected 2 Devices In Platform.
   Detected Device No. 1 - NVIDIA GeForce GT 730    Selected.
 Executing Kernel. Please Wait...
 FG Count = 29283274 / 4529848320
-Estimated fp performance = 16.492781 Gflops
+Estimated float performance = 16.492781 Gflops
 Kernel Duration = 384519 msecs
 
 Detected 1 OpenCL Platforms.
