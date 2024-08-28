@@ -1,6 +1,67 @@
-linux 6.8.0-40-generic
-Ubuntu 22.04.3
 Driver Version: 470.256.02   CUDA Version: 11.4     |
+
+Float (fp32)
+============
+
+Detected 2 OpenCL Platforms.
+Querying Platform No. 0 - NVIDIA CUDA.
+Detected 2 Devices In Platform.
+  Device No. 0 - Tesla K20Xm    Selected.
+  Device No. 1 - NVIDIA GeForce GT 730
+OpenCL Error Code -1
+Querying Platform No. 1 - AMD Accelerated Parallel Processing.
+Detected 0 Devices In Platform.
+Executing Kernel. Please Wait...
+FG Pixel Count = 117093492 / 16609443840
+Estimated float performance = 2255.842285 Gflops
+Kernel Duration = 10308 msecs
+
+
+Detected 2 OpenCL Platforms.
+Querying Platform No. 0 - NVIDIA CUDA.
+Detected 2 Devices In Platform.
+  Device No. 0 - Tesla K20Xm
+  Device No. 1 - NVIDIA GeForce GT 730    Selected.
+OpenCL Error Code -1
+Querying Platform No. 1 - AMD Accelerated Parallel Processing.
+Detected 0 Devices In Platform.
+Executing Kernel. Please Wait...
+FG Pixel Count = 117093492 / 16609443840
+Estimated float performance = 418.328735 Gflops
+Kernel Duration = 55586 msecs
+
+Double (fp64)
+=============
+
+./f64oclshort.bin 
+Detected 2 OpenCL Platforms.
+Querying Platform No. 0 - NVIDIA CUDA.
+Detected 2 Devices In Platform.
+  Device No. 0 - Tesla K20Xm    Selected.
+  Device No. 1 - NVIDIA GeForce GT 730
+OpenCL Error Code -1
+Querying Platform No. 1 - AMD Accelerated Parallel Processing.
+Detected 0 Devices In Platform.
+Executing Kernel. Please Wait...
+FG Pixel Count = 117092468 / 16609443840
+Estimated double performance = 917.757507 Gflops
+Kernel Duration = 25337 msecs
+
+[Set F64TEST2_PIXELDIM 12288]
+Detected 2 OpenCL Platforms.
+Querying Platform No. 0 - NVIDIA CUDA.
+Detected 2 Devices In Platform.
+  Device No. 0 - Tesla K20Xm
+  Device No. 1 - NVIDIA GeForce GT 730    Selected.
+OpenCL Error Code -1
+Querying Platform No. 1 - AMD Accelerated Parallel Processing.
+Detected 0 Devices In Platform.
+Executing Kernel. Please Wait...
+FG Pixel Count = 1170819 / 301989888
+Estimated double performance = 18.913208 Gflops
+Kernel Duration = 22354 msecs
+
+Driver Version: 535.183.01   CUDA Version: 12.2
 
 Float (fp32)
 ============
@@ -8,14 +69,12 @@ Float (fp32)
 ./f32oclshort.bin 
 Detected 1 OpenCL Platforms.
 Querying Platform No. 0 - NVIDIA CUDA.
-Detected 2 Devices In Platform.
+Detected 1 Devices In Platform.
   Device No. 0 - NVIDIA GeForce RTX 2070    Selected.
-  Device No. 1 - NVIDIA GeForce GT 730
 Executing Kernel. Please Wait...
-FG Count = 29279921 / 4529848320
-Estimated float performance = 5749.580566 Gflops
-Kernel Duration = 1103 msecs
-
+FG Pixel Count = 117093492 / 16609443840
+Estimated float performance = 5577.649902 Gflops
+Kernel Duration = 4169 msecs
 
 Double (fp64)
 =============
@@ -23,22 +82,10 @@ Double (fp64)
 ./f64oclshort.bin 
 Detected 1 OpenCL Platforms.
 Querying Platform No. 0 - NVIDIA CUDA.
-Detected 2 Devices In Platform.
+Detected 1 Devices In Platform.
   Device No. 0 - NVIDIA GeForce RTX 2070    Selected.
-  Device No. 1 - NVIDIA GeForce GT 730
 Executing Kernel. Please Wait...
-FG Count = 29281641 / 4529848320
-Estimated double performance = 165.064743 Gflops
-Kernel Duration = 38420 msecs
+FG Pixel Count = 117092468 / 16609443840
+Estimated double performance = 164.584961 Gflops
 
-
-Detected 1 OpenCL Platforms.
-Querying Platform No. 0 - NVIDIA CUDA.
-Detected 2 Devices In Platform.
-  Device No. 0 - Tesla K20Xm    Selected.
-  Device No. 1 - NVIDIA GeForce GT 730
-Executing Kernel. Please Wait...
-FG Pixel Count = 29281641 / 4529848320
-Estimated double performance = 870.049072 Gflops
-Kernel Duration = 7289 msecs
 

@@ -7,7 +7,7 @@
 
 //gcc f64oclshort.c -o f64oclshort.bin -lOpenCL -O3 -march=native -Wall
 
-#define F64TEST2_PIXELDIM 61440
+#define F64TEST2_PIXELDIM 122880
 #define KERNEL_COUNT 1
 #define MAX_PLATFORMS 10
 #define MAX_DEVICES 25
@@ -33,8 +33,17 @@ __kernel void getfgcount(__global unsigned long* counts) { \
       temp = zr*zr - zi*zi + REALCONST;\
       zi = 2*zr*zi + IMAGCONST;\
       zr = temp;\
+      temp = zr*zr - zi*zi + REALCONST;\
+      zi = 2*zr*zi + IMAGCONST;\
+      zr = temp;\
+      temp = zr*zr - zi*zi + REALCONST;\
+      zi = 2*zr*zi + IMAGCONST;\
+      zr = temp;\
+      temp = zr*zr - zi*zi + REALCONST;\
+      zi = 2*zr*zi + IMAGCONST;\
+      zr = temp;\
     }\
-    count += ((zi*zi + zr*zr) < 1000.0f);\
+    count += ((zi*zi + zr*zr) < THRESHOLD);\
   }\
   counts[y] = count;\
     }"};
@@ -68,8 +77,12 @@ void printf_cl_error(cl_int res) {
   if (res == CL_INVALID_BINARY) printf("CL_INVALID_BUILD_OPTIONS\n");
   if (res == CL_INVALID_DEVICE) printf("CL_INVALID_DEVICE\n");
   if (res != CL_SUCCESS) {
-    printf("OpenCL Failed With Error Code %i\n", res);
-    exit(1);
+    if (res == -1) {
+      printf("OpenCL Error Code %i\n", res);
+    } else {
+      printf("OpenCL Failed With Error Code %i\n", res);
+      exit(1);
+    }
   }
 }
 
@@ -87,10 +100,12 @@ int64_t tstampmsec() {
 int main(int argc, char* argv[]) {
   printf("This program counts the number of foreground pixels in a large Julia set fractal image, without actually creating the image. It is to benchmark floating point arithmetic performance of an OpenCL device.\nAuthor: Simon Goater August 2024\n\n");
 // Use float, double, or half below if supported.
-  char* floattype = "double";
+  int floattypeno = 2; // half=0 float=1 double=2
+  char floattypesuffixes[] = {'h', 'f', ' '};
+  char *floattypes[] = {"half", "float", "double"};
   int64_t progstart, progend;
   int32_t i,j;
-  uint64_t maxiterations = 200;
+  uint64_t maxiterations = 50;
   uint64_t dim[3], dimlocal[3];
   char text[NAMES_LENGTH];
   dim[0] = 192;
@@ -100,7 +115,7 @@ int main(int argc, char* argv[]) {
   dimlocal[1] = 1;
   dimlocal[2] = 1;
   char ocloptions[512];
-  sprintf(ocloptions, "-D FLOATTYPE=%s -D DIM0=%lu -D DIM1=%lu -D DIM2=%lu -D PIXELDIM=%u -D MAXITERATIONS=%lu -D REALSTART=-2.0f -D REALEND=2.0f -D IMAGSTART=-2.0f -D IMAGEND=2.0f -D REALCONST=-0.003f -D IMAGCONST=0.647f ", floattype, dim[0], dim[1], dim[2], F64TEST2_PIXELDIM, maxiterations);
+  sprintf(ocloptions, "-D FLOATTYPE=%s -D DIM0=%lu -D DIM1=%lu -D DIM2=%lu -D PIXELDIM=%u -D MAXITERATIONS=%lu -D REALSTART=-2.0%c -D REALEND=2.0%c -D IMAGSTART=-2.0%c -D IMAGEND=2.0%c -D REALCONST=-0.003%c -D IMAGCONST=0.647%c -D THRESHOLD=1000.0%c", floattypes[floattypeno], dim[0], dim[1], dim[2], F64TEST2_PIXELDIM, maxiterations, floattypesuffixes[floattypeno], floattypesuffixes[floattypeno], floattypesuffixes[floattypeno], floattypesuffixes[floattypeno], floattypesuffixes[floattypeno], floattypesuffixes[floattypeno], floattypesuffixes[floattypeno]);
   
   cl_int res;
   cl_uint platformCount = 0;
@@ -115,7 +130,7 @@ int main(int argc, char* argv[]) {
   platformCount = (platformCount > MAX_PLATFORMS ? MAX_PLATFORMS : platformCount);
   printf("Detected %i OpenCL Platforms.\n", platformCount);
   if (platformCount < 1) exit(1);
-  cl_platform_id* platforms = malloc(sizeof(cl_platform_id) * platformCount);  
+  cl_platform_id* platforms = calloc(platformCount, sizeof(cl_platform_id));  
   printf_cl_error(clGetPlatformIDs(platformCount, platforms, NULL));
   for (i=0; i<platformCount; i++) {
     printf_cl_error(clGetDeviceIDs(platforms[i], CL_DEVICE_TYPE_ALL, 0, NULL, &deviceCount));
@@ -174,6 +189,7 @@ int main(int argc, char* argv[]) {
   progend = tstampmsec();
   for (uint64_t y=0; y<yrange; y++) count += counts[y];  
   printf("FG Pixel Count = %lu / %lu\n", count, yrange*F64TEST2_PIXELDIM);
-  if (progend > progstart) printf("Estimated %s performance = %f Gflops\n", floattype, 7*maxiterations*yrange*F64TEST2_PIXELDIM/(1000000.0f*(progend - progstart)));
+  if (progend > progstart) printf("Estimated %s performance = %f Gflops\n", floattypes[floattypeno], 28*maxiterations*yrange*F64TEST2_PIXELDIM/(1000000.0f*(progend - progstart)));
   printf("Kernel Duration = %li msecs\n", progend - progstart);
+  free(counts);
 }
