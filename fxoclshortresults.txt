@@ -1,0 +1,89 @@
+Driver Version: 470.256.02   CUDA Version: 11.4     |
+
+$ ./f64ocltest.bin DeviceNames.txt 200 -2 2 -2 2 -0.003 0.647
+Read 2 Device Name Platform Name pairs from DeviceNames.txt.
+Detected 1 OpenCL Platforms.
+Querying Platform NVIDIA CUDA.
+Detected 1 Devices.
+Including Device Tesla K20Xm. [0]
+FG Count = 29283274 / 3774873600
+Est. fp32 performance = 418.998108 Gflops
+Duration = 12613 msecs
+FG Count = 29280703 / 3774873600
+Est. fp64 performance = 780.623779 Gflops
+Duration = 6770 msecs
+
+
+$ ./f64ocltest.bin DeviceNames.txt 200 -2 2 -2 2 -0.003 0.647
+Read 2 Device Name Platform Name pairs from DeviceNames.txt.
+Detected 1 OpenCL Platforms.
+Querying Platform NVIDIA CUDA.
+Detected 1 Devices.
+Including Device NVIDIA GeForce RTX 2070. [0]
+FG Count = 29283274 / 3774873600
+Est. fp32 performance = 146.776184 Gflops
+Duration = 36006 msecs
+FG Count = 29280703 / 3774873600
+Est. fp64 performance = 150.822571 Gflops
+Duration = 35040 msecs
+
+Float (fp32)
+============
+
+./f32oclshort.bin 
+Detected 1 OpenCL Platforms.
+Querying Platform No. 0 - NVIDIA CUDA.
+Detected 2 Devices In Platform.
+  Device No. 0 - NVIDIA GeForce RTX 2070    Selected.
+  Device No. 1 - NVIDIA GeForce GT 730
+Executing Kernel. Please Wait...
+FG Count = 29283274 / 4529848320
+Estimated fp performance = 144.285660 Gflops
+Kernel Duration = 43953 msecs
+
+Detected 1 OpenCL Platforms.
+Querying Platform No. 0 - NVIDIA CUDA.
+Detected 2 Devices In Platform.
+  Detected Device No. 0 - NVIDIA GeForce RTX 2070
+  Detected Device No. 1 - NVIDIA GeForce GT 730    Selected.
+Executing Kernel. Please Wait...
+FG Count = 29283274 / 4529848320
+Estimated fp performance = 16.492781 Gflops
+Kernel Duration = 384519 msecs
+
+Detected 1 OpenCL Platforms.
+Querying Platform No. 0 - NVIDIA CUDA.
+Detected 2 Devices In Platform.
+  Device No. 0 - Tesla K20Xm    Selected.
+  Device No. 1 - NVIDIA GeForce GT 730
+Executing Kernel. Please Wait...
+FG Pixel Count = 29283274 / 4529848320
+Estimated float performance = 464.123810 Gflops
+Kernel Duration = 13664 msecs
+
+
+Double (fp64)
+=============
+
+./f64oclshort.bin 
+Detected 1 OpenCL Platforms.
+Querying Platform No. 0 - NVIDIA CUDA.
+Detected 2 Devices In Platform.
+  Device No. 0 - NVIDIA GeForce RTX 2070    Selected.
+  Device No. 1 - NVIDIA GeForce GT 730
+Executing Kernel. Please Wait...
+FG Count = 29280703 / 4529848320
+Estimated double performance = 165.064743 Gflops
+Kernel Duration = 38420 msecs
+
+
+Detected 1 OpenCL Platforms.
+Querying Platform No. 0 - NVIDIA CUDA.
+Detected 2 Devices In Platform.
+  Device No. 0 - Tesla K20Xm    Selected.
+  Device No. 1 - NVIDIA GeForce GT 730
+Executing Kernel. Please Wait...
+FG Pixel Count = 29280703 / 4529848320
+Estimated double performance = 870.049072 Gflops
+Kernel Duration = 7289 msecs
+
