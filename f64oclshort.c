@@ -100,7 +100,7 @@ int main(int argc, char* argv[]) {
   dimlocal[1] = 1;
   dimlocal[2] = 1;
   char ocloptions[512];
-  sprintf(ocloptions, "-D FLOATTYPE=%s -D DIM0=%lu -D DIM1=%lu -D DIM2=%lu -D PIXELDIM=%u -D MAXITERATIONS=%lu -D REALSTART=-2.0 -D REALEND=2.0 -D IMAGSTART=-2.0 -D IMAGEND=2.0 -D REALCONST=-0.003 -D IMAGCONST=0.647 ", floattype, dim[0], dim[1], dim[2], F64TEST2_PIXELDIM, maxiterations);
+  sprintf(ocloptions, "-D FLOATTYPE=%s -D DIM0=%lu -D DIM1=%lu -D DIM2=%lu -D PIXELDIM=%u -D MAXITERATIONS=%lu -D REALSTART=-2.0f -D REALEND=2.0f -D IMAGSTART=-2.0f -D IMAGEND=2.0f -D REALCONST=-0.003f -D IMAGCONST=0.647f ", floattype, dim[0], dim[1], dim[2], F64TEST2_PIXELDIM, maxiterations);
   
   cl_int res;
   cl_uint platformCount = 0;
