@@ -27,7 +27,7 @@ Detected 2 Devices In Platform.
   Device No. 0 - NVIDIA GeForce RTX 2070    Selected.
   Device No. 1 - NVIDIA GeForce GT 730
 Executing Kernel. Please Wait...
-FG Count = 29280703 / 4529848320
+FG Count = 29281641 / 4529848320
 Estimated double performance = 165.064743 Gflops
 Kernel Duration = 38420 msecs
 
@@ -38,7 +38,7 @@ Detected 2 Devices In Platform.
   Device No. 0 - Tesla K20Xm    Selected.
   Device No. 1 - NVIDIA GeForce GT 730
 Executing Kernel. Please Wait...
-FG Pixel Count = 29280703 / 4529848320
+FG Pixel Count = 29281641 / 4529848320
 Estimated double performance = 870.049072 Gflops
 Kernel Duration = 7289 msecs
 
