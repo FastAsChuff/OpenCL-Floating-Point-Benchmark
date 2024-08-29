@@ -98,11 +98,25 @@ int64_t tstampmsec() {
 } 	
 
 int main(int argc, char* argv[]) {
-  printf("This program counts the number of foreground pixels in a large Julia set fractal image, without actually creating the image. It is to benchmark floating point arithmetic performance of an OpenCL device.\nAuthor: Simon Goater August 2024\n\n");
-// Use float, double, or half below if supported.
+  printf("This program counts the number of foreground pixels in a large Julia set fractal image, without actually creating the image. It is to benchmark floating point arithmetic performance of an OpenCL device.\nUsage:- %s platformno deviceno floattype\nfloattype = h for half, f for float, blank for double\nAuthor: Simon Goater August 2024\n\n", argv[0]);
+  unsigned int platformno = 0; // Choose Default Platform No.
+  unsigned int deviceno = 0;  // Choose Default Device No.
   int floattypeno = 2; // half=0 float=1 double=2
   char floattypesuffixes[] = {'h', 'f', ' '};
   char *floattypes[] = {"half", "float", "double"};
+  int argv1, argv2;
+  if (argc > 1) { 
+    argv1 = atoi(argv[1]);
+    if ((argv1 >= 0) && (argv1 < MAX_PLATFORMS)) platformno = argv1;
+  }
+  if (argc > 2) { 
+    argv2 = atoi(argv[2]);
+    if ((argv2 >= 0) && (argv2 < MAX_DEVICES)) deviceno = argv2;
+  }
+  if (argc > 3) { 
+    if (argv[3][0] == 'h') floattypeno = 0;
+    if (argv[3][0] == 'f') floattypeno = 1;
+  }
   int64_t progstart, progend;
   int32_t i,j;
   uint64_t maxiterations = 50;
@@ -122,8 +136,6 @@ int main(int argc, char* argv[]) {
   cl_uint deviceCount = 0;
   _Bool platformchosen = false;
   _Bool devicechosen = false;  
-  unsigned int platformno = 0; // Choose Platform No.
-  unsigned int deviceno = 0;  // Choose Device No.
   cl_platform_id platform;
   cl_device_id device;  
   printf_cl_error(clGetPlatformIDs(MAX_PLATFORMS, NULL, &platformCount));
@@ -162,7 +174,7 @@ int main(int argc, char* argv[]) {
   free(platforms);
   if (!platformchosen || !devicechosen) {
     printf("No Platform/Device chosen.\n");
-    printf("This program runs on one and only one device. Please edit platformno/deviceno to include OpenCL device.\n");
+    printf("This program runs on one and only one device. Please select platformno deviceno to include OpenCL device.\n");
     exit(1);
   }
   cl_context ContextId = clCreateContext(NULL, 1, &device, NULL, NULL, &res);
