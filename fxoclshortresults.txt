@@ -1,5 +1,6 @@
 Driver Version: 470.256.02   CUDA Version: 11.4     |
 
+
 Float (fp32)
 ============
 
@@ -27,8 +28,8 @@ Querying Platform No. 1 - AMD Accelerated Parallel Processing.
 Detected 0 Devices In Platform.
 Executing Kernel. Please Wait...
 FG Pixel Count = 117093492 / 16609443840
-Estimated float performance = 418.328735 Gflops
-Kernel Duration = 55586 msecs
+Estimated float performance = 417.667511 Gflops
+Kernel Duration = 55674 msecs
 
 Double (fp64)
 =============
@@ -44,8 +45,8 @@ Querying Platform No. 1 - AMD Accelerated Parallel Processing.
 Detected 0 Devices In Platform.
 Executing Kernel. Please Wait...
 FG Pixel Count = 117092468 / 16609443840
-Estimated double performance = 917.757507 Gflops
-Kernel Duration = 25337 msecs
+Estimated double performance = 918.881775 Gflops
+Kernel Duration = 25306 msecs
 
 [Set F64TEST2_PIXELDIM 12288]
 Detected 2 OpenCL Platforms.
@@ -58,23 +59,24 @@ Querying Platform No. 1 - AMD Accelerated Parallel Processing.
 Detected 0 Devices In Platform.
 Executing Kernel. Please Wait...
 FG Pixel Count = 1170819 / 301989888
-Estimated double performance = 18.913208 Gflops
-Kernel Duration = 22354 msecs
+Estimated double performance = 18.914053 Gflops
+Kernel Duration = 22353 msecs
 
 Driver Version: 535.183.01   CUDA Version: 12.2
 
 Float (fp32)
 ============
 
-./f32oclshort.bin 
+./f64oclshort.bin 0 0 f
 Detected 1 OpenCL Platforms.
 Querying Platform No. 0 - NVIDIA CUDA.
 Detected 1 Devices In Platform.
   Device No. 0 - NVIDIA GeForce RTX 2070    Selected.
 Executing Kernel. Please Wait...
 FG Pixel Count = 117093492 / 16609443840
-Estimated float performance = 5577.649902 Gflops
-Kernel Duration = 4169 msecs
+Estimated float performance = 6071.336914 Gflops
+Kernel Duration = 3830 msecs
+
 
 Double (fp64)
 =============
@@ -86,6 +88,6 @@ Detected 1 Devices In Platform.
   Device No. 0 - NVIDIA GeForce RTX 2070    Selected.
 Executing Kernel. Please Wait...
 FG Pixel Count = 117092468 / 16609443840
-Estimated double performance = 164.584961 Gflops
-
+Estimated double performance = 166.062408 Gflops
+Kernel Duration = 140027 msecs
 
