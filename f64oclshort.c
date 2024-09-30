@@ -104,6 +104,7 @@ int main(int argc, char* argv[]) {
   int floattypeno = 2; // half=0 float=1 double=2
   char floattypesuffixes[] = {'h', 'f', ' '};
   char *floattypes[] = {"half", "float", "double"};
+  char *fpextensions[] = {"cl_khr_fp16", " ", "cl_khr_fp64"};
   int argv1, argv2;
   if (argc > 1) { 
     argv1 = atoi(argv[1]);
@@ -163,7 +164,20 @@ int main(int argc, char* argv[]) {
         if ((i == platformno) && (j == deviceno)) {
           device = devices[j];
           printf("    Selected.\n");
-          devicechosen = true;
+          size_t devextsize = 0;
+          printf_cl_error(clGetDeviceInfo(device, CL_DEVICE_EXTENSIONS, 0, NULL, &devextsize));
+          char *devext = malloc(devextsize);
+          if (devext != NULL) {
+            printf_cl_error(clGetDeviceInfo(device, CL_DEVICE_EXTENSIONS, devextsize, devext, NULL));
+            if (strstr(devext, fpextensions[floattypeno]) == NULL) {
+              printf("ERROR! %s type not supported by this device.\n", floattypes[floattypeno]);
+            } else {
+              devicechosen = true;
+            }
+            free(devext);
+          } else {
+            printf("malloc failed!\n");
+          }
         } else {
           printf("\n");
         }
