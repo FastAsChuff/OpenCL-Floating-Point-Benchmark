@@ -6,3 +6,5 @@ This program counts the number of foreground pixels in a large Julia set fractal
 Author: Simon Goater August 2024
 
 See fxoclshortresults.txt for example output.
+
+[Support for half precision not working]
